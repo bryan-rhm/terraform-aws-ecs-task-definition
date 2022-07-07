@@ -59,23 +59,23 @@ variable "volumes" {
   type = list(object({
     host_path = optional(string)
     name      = string
-    docker_volume_configuration = optional(list(object({
+    docker_volume_configuration = optional(object({
       autoprovision = bool
       driver        = string
       driver_opts   = map(string)
       labels        = map(string)
       scope         = string
-    })))
-    efs_volume_configuration = optional(list(object({
+    }))
+    efs_volume_configuration = optional(object({
       file_system_id          = string
       root_directory          = optional(string)
       transit_encryption      = optional(string)
       transit_encryption_port = optional(string)
-      authorization_config = optional(list(object({
+      authorization_config = optional(object({
         access_point_id = optional(string)
         iam             = optional(string)
-      })))
-    })))
+      }))
+    }))
   }))
   default = []
 }
