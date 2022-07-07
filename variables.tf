@@ -57,23 +57,23 @@ variable "proxy_configuration" {
 variable "volumes" {
   description = "(Optional) Configuration block for volumes that containers in your task may use."
   type = list(object({
-    host_path = string
+    host_path = optional(string)
     name      = string
-    docker_volume_configuration = list(object({
+    docker_volume_configuration = optional(object({
       autoprovision = bool
       driver        = string
       driver_opts   = map(string)
       labels        = map(string)
       scope         = string
     }))
-    efs_volume_configuration = list(object({
+    efs_volume_configuration = optional(object({
       file_system_id          = string
-      root_directory          = string
-      transit_encryption      = string
-      transit_encryption_port = string
-      authorization_config = list(object({
-        access_point_id = string
-        iam             = string
+      root_directory          = optional(string)
+      transit_encryption      = optional(string)
+      transit_encryption_port = optional(string)
+      authorization_config = optional(object({
+        access_point_id = optional(string)
+        iam             = optional(string)
       }))
     }))
   }))
